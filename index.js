@@ -1,5 +1,5 @@
 'use strict'
-
+//  REMEMBER to add config.json file 
 require('dotenv').config();
 
 const server =require('./src/server.js');
