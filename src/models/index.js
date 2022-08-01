@@ -5,6 +5,7 @@ require('dotenv').config(); //this allows us to access database
 const {Sequelize,DataTypes}= require("sequelize");
 const storesCategory=require("./storesCategory.model.js")
 const users=require("./users.model.js")
+const stores=require("./stores.model.js")
 const Collection=require('./lib/collection.js');
 
 //connection url
@@ -28,12 +29,28 @@ let sequelize = new Sequelize(postgres_url,sequelizeOptions)
 let userModel=users(sequelize,DataTypes);
 let userCollection=new Collection(userModel)
 //------
+
+
+
 let storesCategoryModel=storesCategory(sequelize,DataTypes);
-let storesCategoryCollection=new Collection(storesCategoryModel)
+let storesModel=stores(sequelize,DataTypes);
+//------
+//this is means ( store category has many stores ) relation between tables
+//sourceKey -->PK 
+
+storesCategoryModel.hasMany(storesModel,{foreignKey:"storeCategoryId",sourceKey:'id'})
+storesModel.belongsTo(storesCategoryModel,{foreignKey:"storeCategoryId",targetKey:'id'})
 //-----
+
+let storesCategoryCollection=new Collection(storesCategoryModel)
+let storesCollection=new Collection(storesModel)
+
+//------------
+
 module.exports={
     db:sequelize,// for connection 
    storesCategory: storesCategoryCollection,
     users:userCollection,
+    stores:storesCollection
 
 }
