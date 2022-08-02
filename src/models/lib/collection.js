@@ -54,5 +54,17 @@ async deleteRecord(id){
         console.error(`error in deleting record ${this.model.name}`)
     }
 }
+//-----------------
+async readStoreForCategory(stores){
+    try{
+        console.log(stores)
+       
+        return await this.model.findOne({ include: [stores] })
+   
+}
+    catch(err){
+        console.error(`error in getting stores of category  record ${this.model.name}`)
+    }
+}
 }
 module.exports=Collection;

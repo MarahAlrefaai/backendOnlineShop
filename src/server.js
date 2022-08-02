@@ -7,12 +7,14 @@ const cors=require("cors")
 const notFound = require('./error-handlers/404.js')
 const userRouter=require("./routes/users.js")
 const storesCategoryRouter=require('./routes/storesCategory.js')
+const storesRouter=require('./routes/stores.js')
 app.use(cors());
 app.use(express.json());//this route to identify body 
 // app.use(errorHandler);
 // app.use(notFound);
 app.use(userRouter);
 app.use(storesCategoryRouter);
+app.use(storesRouter);
 app.get('/',(req,res)=>{//this is a rout
   //res.json({method : req.reqType, });
   res.send('home route');
