@@ -3,7 +3,7 @@
 const express = require('express')
 const router=express.Router();
 const { stores}=require("../models/index.js");
-
+const {products}=require("../models/index.js");
 // routers 
 
 router.get('/stores',getAllStores);
@@ -11,7 +11,7 @@ router.get('/stores/:id',getOneStores);
 router.post('/stores',createStores);
 router.delete('/stores/:id',deleteStores);
 router.put('/stores/:id',updatedStores);
-
+router.get('/readProductsForStore/:id',readProductsForStore);
 async function getAllStores(req,res) {
    
     let allStores = await stores.readRecord();//get model that we impot it from index.js
@@ -47,5 +47,18 @@ async function deleteStores(req,res){
        const Updatedstores = await stores.updateRecord(body,id);
        res.status(201).json(Updatedstores);
    }
-
+   async function readProductsForStore(req,res) {
+    console.log(products)
+    let id = parseInt(req.params.id);
+    let StoresProducts = await stores.readStoreForCategory(products);//get model that we impot it from index.js
+    //this for loop to get store of specific category 
+        const currProducts2 = StoresProducts.filter(myFunction);
+        function myFunction(value, index, array) {
+          if(value.id == id){
+            return value.products;
+          }
+        }
+        
+    res.status(200).json( currProducts2[0].products);
+}
 module.exports=router;

@@ -32,6 +32,29 @@ async readRecord(id){
     }
 }
 //--------------------
+async readRecordBasedOnName(firstName){
+    try{
+             console.log(firstName)
+        return  await this.model.findOne({ where: { firstName: firstName } });
+    
+}
+    catch(err){
+        console.error(`error in reading  record ${this.model.name}`)
+    }
+}
+//--------------------
+//--------------------
+async readRecordBasedOnToken(userToken){
+    try{
+             
+        return  await this.model.findOne({ where: { firstName: userToken.firstName } });
+    
+}
+    catch(err){
+        console.error(`error in reading  record ${this.model.name}`)
+    }
+}
+//--------------------
 async updateRecord(body,id){
     try{
 
@@ -57,9 +80,8 @@ async deleteRecord(id){
 //-----------------
 async readStoreForCategory(stores){
     try{
-        console.log(stores)
        
-        return await this.model.findOne({ include: [stores] })
+       return await this.model.findAll({ include: [stores.model] })
    
 }
     catch(err){
