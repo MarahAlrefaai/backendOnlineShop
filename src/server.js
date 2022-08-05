@@ -15,8 +15,6 @@ const signUpRouter=require('./routes/auth/signUp.js')
 const secretstuffRouter=require('./routes/auth/secretstuff.js')
 app.use(cors());
 app.use(express.json());//this route to identify body 
-// app.use(errorHandler);
-// app.use(notFound);
 app.use(userRouter);
 app.use(storesCategoryRouter);
 app.use(storesRouter);
@@ -30,7 +28,8 @@ app.get('/',(req,res)=>{//this is a rout
   //res.json({method : req.reqType, });
   res.send('home route');
 })
-
+app.use(errorHandler);
+app.use('*',notFound);
 function start(port){
   app.listen(port,()=>{
     console.log(`running on port ${port}`)
