@@ -4,13 +4,14 @@ const express = require('express')
 const router=express.Router();
 const { stores}=require("../models/index.js");
 const {products}=require("../models/index.js");
+const {users}=require("../models/index.js");
 // routers 
 
 router.get('/stores',getAllStores);
 router.get('/stores/:id',getOneStores);
 router.post('/stores',createStores);
 router.delete('/stores/:id',deleteStores);
-router.put('/stores/:id',updatedStores);
+router.put('/stores/:id:name',updatedStores);
 router.get('/readProductsForStore/:id',readProductsForStore);
 async function getAllStores(req,res) {
    
@@ -35,8 +36,21 @@ async function getOneStores(req,res) {
 async function deleteStores(req,res){
    
     let deleteId = parseInt(req.params.id);
+// {
+//     "name":"marah"
+// }
+    let currentUser = req.body;
+    // console.log("currentUser" , currentUser)
+    // console.log("currentId" , deleteId)
+    let wantesstore = await stores.readRecord(deleteId);
+    let thisUser = await users.readRecord(currentUser.userId);
+      console.log("thisUser" , thisUser)
+    if(wantesstore.owner==currentUser.name || thisUser.role =="admin"){
     let deletedstores = await stores.deleteRecord(deleteId);
     res.status(204).json(deletedstores);
+    }else{
+      res.send("sorry this is not you store  ");
+    }
 
   }
   
