@@ -2,9 +2,9 @@
 const express =require("express");
 
 const app=express();//to use express methods and libraries
-const errorHandler = require('./error-handlers/500.js')
+const errorHandler = require('./middleware/error-handlers/500.js')
 const cors=require("cors")
-const notFound = require('./error-handlers/404.js')
+const notFound = require('./middleware/error-handlers/404.js.js')
 const userRouter=require("./routes/users.js")
 const storesCategoryRouter=require('./routes/storesCategory.js')
 const storesRouter=require('./routes/stores.js')
