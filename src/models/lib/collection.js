@@ -9,6 +9,7 @@ constructor(model){
 //obj is thebody information
 async createRecord(obj){
     try{
+        
         let newRecord= await this.model.create(obj);
         return newRecord
     }
@@ -86,6 +87,18 @@ async readStoreForCategory(stores){
 }
     catch(err){
         console.error(`error in getting stores of category  record ${this.model.name}`)
+    }
+}
+//-----------------
+async readordersForspicificUser(orders){
+    try{
+        console.log(orders)
+       
+       return await this.model.findAll({ include: [orders.model] })
+   
+}
+    catch(err){
+        console.error(`error in getting orders of user  record ${this.model.name}`)
     }
 }
 }

@@ -20,7 +20,9 @@ async function getAllOrders(req,res) {
 // localhost:3005/getOneOrders (body:{firstName:'razan',lastName:'quran'})
 async function createOrders(req,res) {
     let newOrders = req.body;//that we will add it from postman
+   console.log(newOrders)
     let postOrders = await orders.createRecord(newOrders);//let new inside this var(imagin it like new row)
+    console.log(postOrders)
     res.status(201).json(postOrders);
 }
 

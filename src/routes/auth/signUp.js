@@ -28,9 +28,9 @@ async function createUser(req,res) {
     "email":"sara@yahoo.com",
     "password": "123test"
  }*/
-  let {firstName,lastName,mobileNumber,email,password} = req.body;//take the body from the postman 
+  let {firstName,lastName,mobileNumber,email,password,role} = req.body;//take the body from the postman 
   console.log({firstName:firstName,lastName:lastName,mobileNumber:mobileNumber, email:email ,password:await encrypt(password)})
-  let postUser = await users.createRecord({firstName:firstName,lastName:lastName,mobileNumber:mobileNumber, email:email,password:await encrypt(password)});//let new inside this var(imagin it like new row)
+  let postUser = await users.createRecord({firstName:firstName,lastName:lastName,mobileNumber:mobileNumber, email:email,password:await encrypt(password),role:role});//let new inside this var(imagin it like new row)
   res.status(201).json(postUser);}
   catch(e){console.log("problem in create user")}
 }

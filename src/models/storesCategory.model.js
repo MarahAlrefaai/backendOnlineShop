@@ -15,6 +15,7 @@ const storesCategory=(sequelize,DataTypes)=>sequelize.define('storesCategory',{
     ,
     image:{
         type:DataTypes.STRING,
+        
        
     }
 });

@@ -11,6 +11,7 @@ const orders=(sequelize,DataTypes)=>sequelize.define('orders',{
    
     orderimage:{
         type:DataTypes.STRING,
+        allowNull:false
        
     },
     date:{

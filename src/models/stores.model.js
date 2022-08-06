@@ -2,7 +2,7 @@
 
 const sequelize = require("sequelize")
 
-const stores=(sequelize,DataTypes)=>sequelize.define('stores1',{
+const stores=(sequelize,DataTypes)=>sequelize.define('stores',{
     storename:{
         type:DataTypes.STRING,
         allowNull:false
@@ -15,13 +15,16 @@ const stores=(sequelize,DataTypes)=>sequelize.define('stores1',{
     ,
     image:{
         type:DataTypes.STRING,
+        allowNull:false
        
     },
     location:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull:false
     },
     owner:{
-        type:DataTypes.STRING
+        type:DataTypes.STRING,
+        allowNull:false
     },
     storeCategoryId:{
         type:DataTypes.INTEGER,

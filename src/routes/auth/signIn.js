@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express');
-const basicAuth=require('../../middleware/AUTH/basi_auth.js');
+const basicAuth=require('../../middleware/auth/basi_auth.js');
 const router = express.Router(); //get method router 
 
 //routs

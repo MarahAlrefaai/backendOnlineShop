@@ -2,9 +2,9 @@
 const express =require("express");
 
 const app=express();//to use express methods and libraries
-const errorHandler = require('./error-handlers/500.js')
+const errorHandler = require('./middleware/error-handlers/500.js')
 const cors=require("cors")
-const notFound = require('./error-handlers/404.js')
+const notFound = require('./middleware/error-handlers/404.js')
 const userRouter=require("./routes/users.js")
 const storesCategoryRouter=require('./routes/storesCategory.js')
 const storesRouter=require('./routes/stores.js')
@@ -15,8 +15,6 @@ const signUpRouter=require('./routes/auth/signUp.js')
 const secretstuffRouter=require('./routes/auth/secretstuff.js')
 app.use(cors());
 app.use(express.json());//this route to identify body 
-// app.use(errorHandler);
-// app.use(notFound);
 app.use(userRouter);
 app.use(storesCategoryRouter);
 app.use(storesRouter);
@@ -30,7 +28,8 @@ app.get('/',(req,res)=>{//this is a rout
   //res.json({method : req.reqType, });
   res.send('home route');
 })
-
+app.use(errorHandler);
+app.use('*',notFound);
 function start(port){
   app.listen(port,()=>{
     console.log(`running on port ${port}`)

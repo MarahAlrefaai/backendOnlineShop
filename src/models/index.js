@@ -37,7 +37,7 @@ let userModel=users(sequelize,DataTypes);
 let storesCategoryModel=storesCategory(sequelize,DataTypes);
 let storesModel=stores(sequelize,DataTypes);
 let productsModel=products(sequelize,DataTypes);
-let ordersModel=products(sequelize,DataTypes);
+let ordersModel=orders(sequelize,DataTypes);
 //------
 //this is means ( store category has many stores ) relation between tables
 //sourceKey -->PK 

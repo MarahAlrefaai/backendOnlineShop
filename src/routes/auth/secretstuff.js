@@ -1,7 +1,7 @@
 'use strict'
 const express =require('express');
 const router=express.Router();
-const bearerAuth=require('../../middleware/AUTH/bearerAuth.js');
+const bearerAuth=require('../../middleware/auth/bearerAuth.js');
 
 //routs
 router.get('/secretStuff',bearerAuth, userHandler);
