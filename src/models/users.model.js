@@ -2,7 +2,7 @@
 
 const sequelize = require("sequelize")
 
-const users=(sequelize,DataTypes)=>sequelize.define('users5',{
+const users=(sequelize,DataTypes)=>sequelize.define('users',{
     firstName:{
         type:DataTypes.STRING,
         allowNull:false
