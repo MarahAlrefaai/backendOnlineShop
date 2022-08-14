@@ -32,11 +32,11 @@ const basicAuth = async (req, res, next) => {
       }
       else {
         //next("invalid users");
-        res.status(403).send("invalid User");
+        res.send("invalid User");
       }
     }
     catch (error) {
-      res.status(403).send("invalid Username");//next("invalid usersname");}}
+      res.send("invalid Username");//next("invalid usersname");}}
     }}
   
   
