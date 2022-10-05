@@ -4,11 +4,14 @@ const express = require('express')
 const router=express.Router();
 const { storesCategory}=require("../models/index.js");
 const {stores}=require("../models/index.js");
+const imageController=require("./imageController.js")
+
+
 // routers 
 
 router.get('/storesCategory',getAllStoresCategory);
 router.get('/storesCategory/:id',getOneStoresCategory);
-router.post('/storesCategory',createStoresCategory);
+router.post('/storesCategory',imageController.upload,createStoresCategory);
 router.delete('/storesCategory/:id',deleteStoresCategory);
 router.put('/storesCategory/:id',updatedStoresCategory);
 router.get('/readStoreForCategory/:id',readStoreForCategory);
@@ -21,7 +24,17 @@ async function getAllStoresCategory(req,res) {
 
 // localhost:3005/getOneStoresCategory (body:{firstName:'razan',lastName:'quran'})
 async function createStoresCategory(req,res) {
-    let newStoresCategory = req.body;//that we will add it from postman
+   // let newStoresCategory = req.body;//that we will add it from postman
+    let newStoresCategory = {
+         
+            storeType: req.body.storeType,
+            description: req.body.description,
+            image:req.file.path,
+           
+            
+        }
+      
+    console.log("newStoresCategory  ",newStoresCategory)
     let postStoresCategory = await storesCategory.createRecord(newStoresCategory);//let new inside this var(imagin it like new row)
     res.status(201).json(postStoresCategory);
 }
