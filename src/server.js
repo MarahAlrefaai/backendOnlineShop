@@ -4,6 +4,7 @@ const express =require("express");
 const app=express();//to use express methods and libraries
 const errorHandler = require('./middleware/error-handlers/500.js')
 const cors=require("cors")
+
 const notFound = require('./middleware/error-handlers/404.js')
 const userRouter=require("./routes/users.js")
 const storesCategoryRouter=require('./routes/storesCategory.js')
@@ -24,12 +25,17 @@ app.use(signInRouter);
 app.use(signUpRouter);
 app.use(secretstuffRouter);
 
+//static Images Folder
+app.use('/images', express.static('./images'))
+
 app.get('/',(req,res)=>{//this is a rout
   //res.json({method : req.reqType, });
   res.send('home route');
 })
 app.use(errorHandler);
 app.use('*',notFound);
+
+
 function start(port){
   app.listen(port,()=>{
     console.log(`running on port ${port}`)
